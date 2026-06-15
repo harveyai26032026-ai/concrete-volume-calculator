@@ -29,6 +29,16 @@ const DRY_FACTOR = 1.54;       // wet -> dry materials bulking
 const CEMENT_DENSITY = 1440;   // kg/m^3 loose cement
 
 const M3_TO_FT3 = 35.3146667;
+const KG_PER_LB = 0.45359237;
+const L_PER_GAL = 3.78541;     // US gallon
+
+// cement bag weight options per unit system: [value, label]
+// metric values are kg; imperial values are lb (converted to kg in compute)
+const CEMENT_BAGS = {
+  metric:   [["20","20 kg"],["25","25 kg"],["40","40 kg"]],
+  imperial: [["94","94 lb (US sack)"],["50","50 lb"],["47","47 lb"]]
+};
+const DEFAULT_CEMENT_BAG = { metric:"20", imperial:"94" };
 
 function fillSelect(sel, opts, def){
   sel.innerHTML = opts.map(o => `<option value="${o[0]}">${o[0]}</option>`).join("");
@@ -38,6 +48,11 @@ function fillBag(){
   const sys = $("system").value;
   $("bag").innerHTML = BAGS[sys].map(b => `<option value="${b[1]}">${b[2]}</option>`).join("");
   $("bag").value = BAGS[sys][0][1];
+}
+function fillCementBag(){
+  const sys = $("system").value;
+  $("cementBag").innerHTML = CEMENT_BAGS[sys].map(b => `<option value="${b[0]}">${b[1]}</option>`).join("");
+  $("cementBag").value = DEFAULT_CEMENT_BAG[sys];
 }
 
 function populateUnits(){
@@ -49,6 +64,7 @@ function populateUnits(){
   fillSelect($("thicknessU"), dimOpts, DEFAULT_DEPTH[sys]);
   document.querySelectorAll(".depthsel").forEach(s => fillSelect(s, dimOpts, DEFAULT_DEPTH[sys]));
   fillBag();
+  fillCementBag();
 }
 
 // value in metres from input id + its unit selector id
@@ -134,21 +150,25 @@ function computeMix(totalM3, metric){
   const sandM3   = dry * (m.r[1]/sum);
   const aggM3    = dry * (m.r[2]/sum);
   const cementKg = cementM3 * CEMENT_DENSITY;
-  const bagW = parseFloat($("cementBag").value);
-  const cementBags = Math.ceil(cementKg / bagW);
+  const bagInput = parseFloat($("cementBag").value);            // kg (metric) or lb (imperial)
+  const bagKg = metric ? bagInput : bagInput * KG_PER_LB;       // bag weight in kg
+  const cementBags = bagKg > 0 ? Math.ceil(cementKg / bagKg) : 0;
   const waterL = cementKg * m.wc;
 
   const sand = metric ? `${fmt(sandM3,3)} m³` : `${fmt(sandM3*M3_TO_FT3,2)} ft³`;
   const agg  = metric ? `${fmt(aggM3,3)} m³`  : `${fmt(aggM3*M3_TO_FT3,2)} ft³`;
+  const bagLbl   = metric ? `${fmt(bagInput,0)} kg` : `${fmt(bagInput,0)} lb`;
+  const water    = metric ? `${fmt(waterL,0)} L`    : `${fmt(waterL/L_PER_GAL,1)} gal`;
+  const cementWt = metric ? `${fmt(cementKg,0)} kg` : `${fmt(cementKg/KG_PER_LB,0)} lb`;
 
   $("mixResults").innerHTML =
-    `<div class="stat"><span class="big">${cementBags}</span><span class="lbl">cement bags (${bagW} kg)</span></div>` +
+    `<div class="stat"><span class="big">${cementBags}</span><span class="lbl">cement bags (${bagLbl})</span></div>` +
     `<div class="stat"><span class="big">${sand}</span><span class="lbl">sand (bulk)</span></div>` +
     `<div class="stat"><span class="big">${agg}</span><span class="lbl">aggregate (bulk)</span></div>` +
-    `<div class="stat"><span class="big">${fmt(waterL,0)} L</span><span class="lbl">water (approx)</span></div>`;
+    `<div class="stat"><span class="big">${water}</span><span class="lbl">water (approx)</span></div>`;
   $("mixWc").textContent =
     `Ratio ${m.r.join(":")} (cement:sand:aggregate), water-cement ratio ${m.wc}. ` +
-    `≈${fmt(cementKg,0)} kg cement. Dry-material bulking factor ${DRY_FACTOR} applied.`;
+    `≈${cementWt} cement. Dry-material bulking factor ${DRY_FACTOR} applied.`;
 }
 
 function computeSaw(thickM, metric){
