@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Concrete Calculator Updates</title>
+    <link>https://concrete-calcs.com/</link>
+    <description>Updates and news for the Concrete Calculator utility site.</description>
+    <language>en-us</language>
+    <lastBuildDate>$(date -R)</lastBuildDate>
+    <item>
+      <title>Concrete Calculator launched</title>
+      <link>https://concrete-calcs.com/</link>
+      <pubDate>$(date -R)</pubDate>
+      <description>Free concrete volume calculator with imperial/metric units.</description>
+    </item>
+  </channel>
+</rss>
