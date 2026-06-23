@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Learn about Concrete Calculator, a free, accurate, in‑browser tool for concrete volume, bags, mix ratios and saw cuts. Part of the Nexus Web Tools family.">
 <link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/nav.css">
 <link rel="stylesheet" href="/policy.css">
 <script type="application/ld+json">
 {
@@ -19,8 +20,20 @@
 </head>
 <body>
 <header class="ribbon">
-  <div class="brand">🏗️ Concrete Calculator</div>
-  <nav class="navbar"><a href="/">Home</a></nav>
+  <div class="ribbon-inner">
+    <button class="hamburger" aria-label="Open menu">
+      <svg class="icon-open" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="brand"><a href="/" style="text-decoration:none;color:inherit">🏗️ Concrete Calculator</a></div>
+    <nav>
+      <a href="/">Home</a>
+    </nav>
+    <div class="ribbon-search">
+      <button class="ribbon-search-btn" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+      <input type="text" placeholder="Search…" autocomplete="off">
+    </div>
+  </div>
 </header>
 <main class="policy-content">
 <h1>About Concrete Calculator</h1>
@@ -32,5 +45,6 @@
   <p><a href="/privacy/">Privacy</a> | <a href="/terms/">Terms</a> | <a href="/about/">About</a> | <a href="/contact/">Contact</a></p>
   <p>&copy; 2026 Concrete Calculator</p>
 </footer>
+<script src="/nav.js" defer></script>
 </body>
 </html>
