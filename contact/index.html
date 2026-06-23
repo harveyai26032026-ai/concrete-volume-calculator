@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Contact – Concrete Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Contact Concrete Calculator team via Formspree. No public email address is exposed.">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/policy.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Contact",
+  "url": "https://concrete-calcs.com/contact/",
+  "description": "Contact page for Concrete Calculator using Formspree."
+}
+</script>
+</head>
+<body>
+<header class="ribbon">
+  <div class="brand">🏗️ Concrete Calculator</div>
+  <nav class="navbar"><a href="/">Home</a></nav>
+</header>
+<main class="policy-content">
+<h1>Contact Us</h1>
+<p>We welcome your questions, bug reports, feature requests, and general enquiries. Please fill out the form below and we will typically respond within 48 hours.</p>
+<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" required>
+
+  <label for="email">Email</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="subject">Subject</label>
+  <select id="subject" name="subject" required>
+    <option value="General Enquiry">General Enquiry</option>
+    <option value="Bug Report">Bug Report</option>
+    <option value="Feature Request">Feature Request</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <label for="message">Message</label>
+  <textarea id="message" name="message" rows="6" required></textarea>
+
+  <button type="submit">Send Message</button>
+</form>
+</main>
+<footer class="site-footer">
+  <p><a href="/privacy/">Privacy</a> | <a href="/terms/">Terms</a> | <a href="/about/">About</a> | <a href="/contact/">Contact</a></p>
+  <p>&copy; 2026 Concrete Calculator</p>
+</footer>
+</body>
+</html>
