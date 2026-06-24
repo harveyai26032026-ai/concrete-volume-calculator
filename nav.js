@@ -7,6 +7,13 @@
     { label: 'Privacy Policy', href: '/privacy/' },
     { label: 'Terms of Service', href: '/terms/' },
     { label: 'Concrete Calculator', href: '/', tier: 1 },
+    { label: 'Guides', href: '/guides/shed-slab-calculator/', tier: 1, children: [
+      { label: 'Shed Slab Calculator', href: '/guides/shed-slab-calculator/' },
+      { label: 'Concrete Mix Ratios', href: '/guides/concrete-mix-ratios/' },
+      { label: 'Saw Cuts in Concrete', href: '/guides/saw-cuts-in-concrete/' },
+      { label: 'Driveway Concrete Calculator', href: '/guides/driveway-concrete-calculator/' },
+      { label: 'Pouring on Uneven Ground', href: '/guides/pouring-on-uneven-ground/' },
+    ]},
     { label: 'Nexus Web Tools', href: 'https://nexuswebtools.com/', tier: 1, external: true, children: [
       { label: 'Compound Interest', href: 'https://nexuswebtools.com/compound-interest/' },
       { label: 'Mortgage Calculator', href: 'https://nexuswebtools.com/mortgage/' },
